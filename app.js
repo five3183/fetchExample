@@ -5,44 +5,31 @@ const output = document.getElementById('output')
 
 const getText = () => {
    fetch('test.txt')
-      .then(res => {
-         return res.text()
-      })
-      .then(data => {
-         output.innerHTML = `<h1>${data}</h1>`
-      })
-      .catch(err => {
-         console.log(err)
-      })
+      .then(res => res.text())
+      .then(data => output.innerHTML = `<h1>${data}</h1>`)
+      .catch(err => console.log(err))
 }
 
 const getJson = () => {
    fetch('test.json')
-      .then(res => {
-         return res.json()
-      })
+      .then(res => res.json())
       .then(data => {
          output.innerHTML = ''
          data.forEach(item => {
             output.innerHTML += `<li>Title: ${item.title} Body: ${item.body}</li>`
          });
       })
-      .catch(err => {
-         console.log(err)
-      })
+      .catch(err => console.log(err))
 }
 
 const getAPI = () => {
    fetch('https://api.github.com/users')
-      .then (res => {
-         return res.json()
-      })
+      .then (res => res.json())
       .then(data => {
          output.innerHTML = ''
-         data.forEach(user => {
-            output.innerHTML += `<li>${user.login}</li>`
-         })
+         data.forEach(user => output.innerHTML += `<li>${user.login}</li>`)
       })
+      .catch(err => console.log(err))
 }
 btn1.addEventListener('click', getText)
 btn2.addEventListener('click', getJson)
